@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VisionGallery - AI Image Search</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+
+        <div class="logo">
+            <span class="logo-camera">📸</span>
+            VisionGallery
+        </div>
+
+        <p>
+            AI-powered visual exploration — search the world with text or your voice
+        </p>
+
+        <div class="ai-status">
+            <span class="status-dot"></span>
+            AI Assistant Online
+        </div>
+
+    </header>
+
+
+    <!-- AI WELCOME -->
+    <div class="welcome-card">
+
+        <div class="ai-avatar">
+            🤖
+        </div>
+
+        <div class="welcome-text">
+
+            <h3>
+                👋 Welcome to VisionGallery!
+            </h3>
+
+            <p>
+                Hello everyone! I am your AI Image Assistant.
+                Type or speak what you want to see and explore images instantly.
+            </p>
+
+        </div>
+
+        <button
+            class="voice-welcome-btn"
+            onclick="speakWelcome()"
+        >
+            🔊 Hear Welcome
+        </button>
+
+    </div>
+
+
+    <!-- SEARCH PANEL -->
+    <section class="search-panel">
+
+        <div class="search-box">
+
+            <div class="input-wrapper">
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search or speak... e.g. Nani, Prabhas, tiger, mountains"
+                >
+
+                <button
+                    class="voice-search-btn"
+                    id="voiceSearchBtn"
+                    onclick="startVoiceSearch()"
+                >
+
+                    🎤
+
+                    <span id="voiceButtonText">
+                        Speak
+                    </span>
+
+                </button>
+
+            </div>
+
+
+            <button id="searchBtn">
+                🔍 Search
+            </button>
+
+        </div>
+
+
+        <!-- VOICE RESULT -->
+        <div
+            class="voice-result"
+            id="voiceResult"
+        >
+
+            🎤 You said:
+
+            <strong id="spokenText"></strong>
+
+        </div>
+
+
+        <!-- QUICK SEARCH -->
+        <div class="quick-search">
+
+            <button class="quick-btn">🎬 Nani</button>
+            <button class="quick-btn">🎬 Prabhas</button>
+            <button class="quick-btn">⭐ NTR</button>
+            <button class="quick-btn">🎬 Mahesh Babu</button>
+            <button class="quick-btn">🎬 Allu Arjun</button>
+            <button class="quick-btn">👩 Ileana</button>
+            <button class="quick-btn">👩 Samantha</button>
+
+            <button class="quick-btn">🛕 Krishna</button>
+            <button class="quick-btn">ॐ Shiva</button>
+            <button class="quick-btn">🙏 Ganesha</button>
+
+            <button class="quick-btn">🐅 Tiger</button>
+            <button class="quick-btn">🐶 Dog</button>
+            <button class="quick-btn">🦩 Birds</button>
+
+            <button class="quick-btn">⛰️ Mountains</button>
+            <button class="quick-btn">🌸 Flowers</button>
+            <button class="quick-btn">🚘 Cars</button>
+            <button class="quick-btn">🚀 Space</button>
+            <button class="quick-btn">🌿 Nature</button>
+
+        </div>
+
+    </section>
+
+
+    <!-- FEATURES -->
+    <div class="feature-strip">
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                🧠
+            </div>
+
+            <h4>
+                AI Powered Search
+            </h4>
+
+            <p>
+                Search for people, places, objects,
+                animals and many other topics.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                🎤
+            </div>
+
+            <h4>
+                Voice Search
+            </h4>
+
+            <p>
+                Speak your search instead of typing.
+                Your voice becomes your search query.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                ⚡
+            </div>
+
+            <h4>
+                Fast Image Results
+            </h4>
+
+            <p>
+                Explore multiple image results
+                quickly and easily.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- RESULTS HEADER -->
+    <div class="results-header">
+
+        <h2 id="resultTitle">
+            Images for "Nature"
+        </h2>
+
+        <span
+            class="image-count"
+            id="imageCount"
+        >
+            0 images
+        </span>
+
+    </div>
+
+
+    <!-- LOADING -->
+    <div
+        class="loading"
+        id="loading"
+    >
+
+        <div class="spinner"></div>
+
+        <p>
+            AI is searching for images...
+        </p>
+
+    </div>
+
+
+    <!-- MESSAGE -->
+    <div
+        class="message"
+        id="message"
+        style="display:none;"
+    ></div>
+
+
+    <!-- GALLERY -->
+    <div
+        class="gallery"
+        id="gallery"
+    ></div>
+
+
+    <!-- LIGHTBOX -->
+    <div
+        class="lightbox"
+        id="lightbox"
+    >
+
+        <span
+            class="close-btn"
+            id="closeBtn"
+        >
+            ×
+        </span>
+
+        <button
+            class="prev"
+            id="prevBtn"
+        >
+            ‹
+        </button>
+
+        <img
+            id="lightboxImage"
+            alt="Preview"
+        >
+
+        <button
+            class="next"
+            id="nextBtn"
+        >
+            ›
+        </button>
+
+    </div>
+
+
+    <!-- AI FLOATING MESSAGE -->
+    <div
+        class="ai-message"
+        id="aiMessage"
+    >
+
+        <strong>
+            🤖 VisionGallery AI
+        </strong>
+
+        <p>
+            Hello! 👋 Search for anything you are interested in.
+            You can type your search or simply press the microphone
+            and speak your request.
+        </p>
+
+    </div>
+
+
+    <!-- AI FLOATING BUTTON -->
+    <div
+        class="ai-floating"
+        onclick="toggleAI()"
+    >
+        🤖
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
